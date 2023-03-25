@@ -1,0 +1,14 @@
+<div class = "container-fluid">
+    <app-user-navbar></app-user-navbar>
+</div>
+
+<div class = "container-fluid col-md-6 offset-md-3">
+    <table class="table" border="1">
+    <tr><td>Movie name</td><td><input type="text" name="name" [(ngModel)]="cart.movieName"></td></tr>
+    <tr><td>Show Date</td><td><input type="text" name="showDate" [(ngModel)]="cart.showDate"></td></tr>
+    <tr><td>Show Time</td><td><input type="text" name="showTime" [(ngModel)]="cart.showTime"></td></tr>
+    <tr><td>Ticket-price</td><td><input type="text" name="price" [(ngModel)]="cart.price"></td></tr>
+    <tr><td><button type = "submit" (click)="addMovieTicketToCart()"class = "btn btn-success btn-block">Procced To Pay</button></td></tr>
+    </table>
+
+  
