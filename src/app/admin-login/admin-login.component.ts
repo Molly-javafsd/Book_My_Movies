@@ -20,6 +20,14 @@ export class AdminLoginComponent {
   
 
   public loginadNow(){
+       if(!this.username){
+      alert('Please provide username');
+      return;
+    }
+    if(!this.password){
+      alert('Please provide password');
+      return;
+    }
     let response=this.service.adminLogin(this.username);
     response.subscribe((data:any)=>this.admin=data);
     console.info(this.admin.password)
