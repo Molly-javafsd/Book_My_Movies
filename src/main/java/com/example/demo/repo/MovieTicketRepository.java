@@ -8,7 +8,7 @@ import com.example.demo.model.MovieTicket;
 
 @Repository
 public interface MovieTicketRepository extends JpaRepository<MovieTicket, Integer> {
-	@Query("FROM MovieTicket m WHERE m.movieName=?1")
+	@Query("FROM MovieTicket m WHERE m.movieName LIKE %?1%")
 	public MovieTicket findyByMoviename(String movieName);
 	@Query("FROM MovieTicket m WHERE m.id=?1")
 	public MovieTicket findyByMovieID(int id);
