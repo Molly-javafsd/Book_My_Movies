@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CartClass } from '../CartClass';
+import { MovieTicketClass } from '../MovieTicketClass';
 import { ServiceService } from '../service.service';
 
 @Component({
@@ -11,18 +12,24 @@ import { ServiceService } from '../service.service';
 })
 export class UserAddMovieTicketToCartComponent implements OnInit {
 carts:any;
+id:any;
 cart:CartClass=new CartClass();
+movie:MovieTicketClass=new MovieTicketClass();
+
+
   ngOnInit(): void {
-    let response=this.service.getAllMovieTicketsInCart();
-    response.subscribe((data:any)=>this.carts=data);
+    let id=this.service.movieIdForCart;
+let resp1=this.service.getMovieById(id);
+resp1.subscribe((data:any)=>this.movie=data)
   }
+
+
 
   constructor(private service: ServiceService,private router: Router) {}
 
-  addMovieTicketToCart(){
-    let response=this.service.addMovieTicketToCart(this.cart);
-    response.subscribe((data:any)=>this.carts=data);
-    
+  proceed(){
+    this.cart.movie=this.movie;
+
     this.router.navigate(['/user-list-of-all-movies']);
   }
 }
