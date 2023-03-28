@@ -20,6 +20,14 @@ constructor(private service:ServiceService,public router:Router) {
 
 
 public loginUserNow(){
+     if(!this.username){
+      alert('Please provide username');
+      return;
+    }
+    if(!this.password){
+      alert('Please provide password');
+      return;
+    }
   let response=this.service.userLogin(this.username);
   response.subscribe((data:any)=>this.user=data);
 
