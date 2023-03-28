@@ -10,25 +10,43 @@ import { ServiceService } from '../service.service';
   styleUrls: ['./edit-movie.component.css']
 })
 export class EditMovieComponent implements OnInit {
- 
+
   movie:MovieTicketClass;
   id:string|null;
   registerForm:FormGroup;
   submitted:boolean=false;
-
-
   constructor(private service:ServiceService,private activatedroute:ActivatedRoute, private builder:FormBuilder,private router:Router) { }
+
 
   ngOnInit(): void {
 
     this.id=this.activatedroute.snapshot.paramMap.get('id');
     this.service.getMovieById(Number(this.id)).subscribe(x=>this.movie=x);
 
-        this.service.updateMovie(this.movie,Number(this.id)).subscribe(x=>console.log(x));
+    this.registerForm=this.builder.group({
+      movieName:['',Validators.required],
+      price:['',Validators.required]
+
+    });
+  }
+
+  get form(){
+    return this.registerForm.controls;
+  }
+
+  onSubmit(){
+    this.submitted=true;
+    if(this.registerForm.invalid)
+      return;
+    else
+      {
+        this.service.updateMovie(Number(this.id),this.movie).subscribe(x=>console.log(x));
         alert("Data Updated Successfully");
-        this.router.navigate(['\admin-dashboard'])
+        this.router.navigate(['./admin-dashboard'])
       }
   }
+
+}
   
 
 
